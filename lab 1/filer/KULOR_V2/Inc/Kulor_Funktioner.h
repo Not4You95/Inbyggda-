@@ -10,6 +10,9 @@ void RTC_CalendarConfig(void);
 void SetLed(void);
 void test(void);
 //void RTC_CalendarConfig_test(void);
+/////////////////////////////////////////////
+#define RTC_ASYNCH_PREDIV  0x7F   /* LSE as RTC clock */
+#define RTC_SYNCH_PREDIV   0x00FF /* LSE as RTC clock */
 
 
 

@@ -503,6 +503,10 @@
           <file> 109</file>
         </tool>
         <tool>
+          <name>ICCARM</name>
+          <file> 118</file>
+        </tool>
+        <tool>
           <name>__cstat</name>
           <file> 82</file>
         </tool>

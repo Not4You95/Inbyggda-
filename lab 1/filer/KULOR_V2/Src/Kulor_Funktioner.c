@@ -7,7 +7,7 @@
 #include "stdio.h"
 #include "string.h"
 #include "stm32f3_discovery.h"
-
+#include "Kulor_Funktioner.h"
 
 
 ITStatus UartReady = RESET;
@@ -120,7 +120,7 @@ void RTC_CalendarConfig(void)
   }
     
   if(atoi(SetTime[1])>15){
-    minits = (atoi(SetTime[1])+18);
+    minits = (atoi(SetTime[1])+30);
   }
   else{
     minits = atoi(SetTime[1]);
@@ -207,8 +207,8 @@ void RTC_CLOCK_SETINGS()
       - OutPutType     = Open Drain */ 
   RtcHandle.Instance = RTC; 
   RtcHandle.Init.HourFormat = RTC_HOURFORMAT_24;
- // RtcHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV;
- // RtcHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV;
+  RtcHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV;
+  RtcHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV;
   RtcHandle.Init.OutPut = RTC_OUTPUT_DISABLE;
   RtcHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
   RtcHandle.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;

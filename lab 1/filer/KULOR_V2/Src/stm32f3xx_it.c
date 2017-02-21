@@ -37,7 +37,15 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
+uint32_t               uwIC2Value1 = 0;
+uint32_t               uwIC2Value2 = 0;
+uint32_t               uwDiffCapture = 0;
 
+/* Capture index */
+uint16_t               uhCaptureIndex = 0;
+
+/* Frequency Value */
+uint32_t               uwFrequency = 0;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -94,6 +102,28 @@ void USART3_IRQHandler(void){
 //////////////////////////////////////////////////////////////////
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
   
+  if(htim -> Channel == HAL_TIM_ACTIVE_CHANNEL_2){
+    
+    if(uhCaptureIndex == 0){      
+      uwIC2Value1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
+      uhCaptureIndex = 1;      
+    }
+    else if(uhCaptureIndex ==1){
+      uwIC2Value2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
+      
+      if(uwIC2Value2 > uwIC2Value1){
+        uwDiffCapture = (uwIC2Value2 - uwIC2Value1);
+      }
+      else if(uwIC2Value2 < uwIC2Value1)
+      {
+        uwDiffCapture = ((0xFFFFFFFF- uwIC2Value1)+uwIC2Value2)+1;
+      }
+      else {
+        Error_Handler();
+      }
+      printf("CaptureHandler: %s",uwDiffCapture);
+    }
+  }
   
 }
 /* USER CODE END 1 */

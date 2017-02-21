@@ -94,8 +94,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  //set_clock_serial();
-  test();
+  set_clock_serial();
+ // test();
   while (1)
   {
   /* USER CODE END WHILE */
